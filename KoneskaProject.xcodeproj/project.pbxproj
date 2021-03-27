@@ -81,7 +81,6 @@
 		919BC883260F970F009C336A = {
 			isa = PBXGroup;
 			children = (
-				9105CD17260FDB7C00D8B735 /* AccelerometerViewController.swift */,
 				919BC88E260F970F009C336A /* KoneskaProject */,
 				919BC8A5260F9711009C336A /* KoneskaProjectTests */,
 				919BC8B0260F9711009C336A /* KoneskaProjectUITests */,
@@ -102,6 +101,7 @@
 		919BC88E260F970F009C336A /* KoneskaProject */ = {
 			isa = PBXGroup;
 			children = (
+				9105CD17260FDB7C00D8B735 /* AccelerometerViewController.swift */,
 				919BC88F260F970F009C336A /* AppDelegate.swift */,
 				919BC891260F970F009C336A /* SceneDelegate.swift */,
 				919BC893260F970F009C336A /* ContentView.swift */,

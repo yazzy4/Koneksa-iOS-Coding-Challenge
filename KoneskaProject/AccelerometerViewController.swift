@@ -14,16 +14,30 @@ class AccelerometerViewController: UIViewController {
     var ylabel: UILabel!
     var zlabel: UILabel!
     
-    var motion = CMMotionManager()
+    var motionManager = CMMotionManager()
+    var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerActivated), userInfo: nil, repeats: true)
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         accelertator()
     }
     
+    @objc func timerActivated(timer: Timer) {
+        print("Timer activated!")
+        count += 1
+        
+        if count == 10 {
+            timer.invalidate()
+        }
+    }
+    
+ 
+    
     func accelertator() {
-        motion.accelerometerUpdateInterval = 0.5
-        motion.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
+        timerActivated(timer: timer)
+        motionManager.accelerometerUpdateInterval = 0.5
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
             print(data as Any)
             if let data = data {
                 self.view.reloadInputViews()
@@ -33,8 +47,10 @@ class AccelerometerViewController: UIViewController {
                 self.xlabel.text = "x: \(Double(x))"
                 self.ylabel.text = "y: \(Double(y))"
                 self.zlabel.text = "z: \(Double(z))"
+ 
             }
         }
+        motionManager.stopAccelerometerUpdates()
     }
 
 }
