@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
-        Text("Hello, SwiftUI")
+        Text("Accelerometer")
+            .font(.largeTitle)
+            .fontWeight(.heavy)
+            .foregroundColor(Color.white)
+            .multilineTextAlignment(.leading)
             .padding()
+            .background(Color.blue)
     }
+ 
 }
 
 struct ContentView_Previews: PreviewProvider {
