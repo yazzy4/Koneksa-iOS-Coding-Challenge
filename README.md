@@ -14,17 +14,19 @@ when creating a new project in Xcode.
 There is no UI design for this app so feel free to place the required UI elements where you please. You will not be evaluated on your design skills.
 
 ## UI Elements
-[] Start Button
-[] X, Y, Z value labels
+- [] Start Button
+- [] X, Y, Z value labels
 
 ## UI States
-- INITIAL STATE
- [] Display a Start Button that, when tapped, will begin the accelerometer recording at 50 Hz.
- [] The Start Button should be hidden while in Active State
-- ACTIVE STATE
-  [] Display the real-time accelerometer X, Y, Z values on screen.
-  [] The X, Y, Z values should be hidden in the Initial State
-  [] When the duration expires, write all the recorded accelerometer x,y,z values to the Documents Directory in whatever format you like, then return to the Initial State.
+
+INITIAL STATE 
+- [] Display a Start Button that, when tapped, will begin the accelerometer recording at 50 Hz.
+- [] The Start Button should be hidden while in Active State
+
+ACTIVE STATE
+- [] Display the real-time accelerometer X, Y, Z values on screen.
+- [] The X, Y, Z values should be hidden in the Initial State
+- [] When the duration expires, write all the recorded accelerometer x,y,z values to the Documents Directory in whatever format you like, then return to the Initial State.
 
 ## Remarks
 
