@@ -15,7 +15,7 @@ There is no UI design for this app so feel free to place the required UI element
 
 ## UI Elements
 - [ ] Start Button
-- [ ] X, Y, Z value labels
+- [X] X, Y, Z value labels
 
 ## UI States
 
