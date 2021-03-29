@@ -23,13 +23,13 @@ struct ContentView: View {
                 VStack {
                
                     HStack {
-                        Text(String(format: "%.3f", self.motionLogger.xlabel))
+                        Text(String(format: "%.3f", self.motionLogger.xLabel))
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text(String(format: "%.3f", self.motionLogger.ylabel))
+                        Text(String(format: "%.3f", self.motionLogger.yLabel))
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text(String(format: "%.3f", self.motionLogger.ylabel))
+                        Text(String(format: "%.3f", self.motionLogger.yLabel))
                             .multilineTextAlignment(.leading)
                     }.padding()
                     HStack {
@@ -42,6 +42,16 @@ struct ContentView: View {
                         Text("Z")
                             .font(.title2)
                     }.padding()
+                    HStack {
+                        Button(action: {
+                            self.startLogging.toggle()
+                            
+                            
+                        }, label: {
+                            Image(systemName: "pause.circle")
+                            Text("Stop")
+                        })
+                    }
                 }
             }
         }

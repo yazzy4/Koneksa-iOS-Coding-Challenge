@@ -10,14 +10,20 @@ import CoreMotion
 import Combine
 import SwiftUI
 
+func getTimeStamp() -> String {
+    let format = DateFormatter()
+    format.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
+    return format.string(from: Date())
+}
+
 class AccelerometerMonitor: NSObject, ObservableObject {
     var motionManager: CMMotionManager?
     
     var data = PhoneSensorData()
     
-    @Published var xlabel = 0.0
-    @Published var ylabel = 0.0
-    @Published var zlabel = 0.0
+    @Published var xLabel = 0.0
+    @Published var yLabel = 0.0
+    @Published var zLabel = 0.0
 
     private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private var counter = 0.0
@@ -27,17 +33,28 @@ class AccelerometerMonitor: NSObject, ObservableObject {
         self.motionManager = CMMotionManager()
     }
     
+    
+    
+  
+    
+    
+    
    @objc func startMotionSensor() {
         if let data = motionManager?.accelerometerData {
             let x = data.acceleration.x
             let y = data.acceleration.y
             let z = data.acceleration.z
           
-            self.xlabel = x
-            self.ylabel = y
-            self.zlabel = z
-
+            self.xLabel = x
+            self.yLabel = y
+            self.zLabel = z
+ 
         }
+    
+    let timeStamp = getTimeStamp()
+    
+    self.data.append(time: timeStamp, x: self.xLabel, y: self.yLabel, z: self.zLabel)
+    }
         
         //Add to start button in counter conditional, change button value when complete
         func stopMotionSensor(){
@@ -48,4 +65,4 @@ class AccelerometerMonitor: NSObject, ObservableObject {
         }
     }
     
-}
+
