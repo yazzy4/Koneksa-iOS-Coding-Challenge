@@ -24,7 +24,7 @@ INITIAL STATE
 - [ ] The Start Button should be hidden while in Active State
 
 ACTIVE STATE
-- [ ] Display the real-time accelerometer X, Y, Z values on screen.
+- [X] Display the real-time accelerometer X, Y, Z values on screen.
 - [ ] The X, Y, Z values should be hidden in the Initial State
 - [ ] When the duration expires, write all the recorded accelerometer x,y,z values to the Documents Directory in whatever format you like, then return to the Initial State.
 
