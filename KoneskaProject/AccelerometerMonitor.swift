@@ -25,18 +25,13 @@ class AccelerometerMonitor: NSObject, ObservableObject {
     @Published var yLabel = 0.0
     @Published var zLabel = 0.0
 
-    private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private var timer = Timer()
     private var counter = 0.0
     
     override init() {
         super.init()
         self.motionManager = CMMotionManager()
     }
-    
-    
-    
-  
-    
     
     
    @objc func startMotionSensor() {
@@ -55,10 +50,18 @@ class AccelerometerMonitor: NSObject, ObservableObject {
     
     self.data.append(time: timeStamp, x: self.xLabel, y: self.yLabel, z: self.zLabel)
     }
+    
+    func startUpdate(_ freq: Double) {
+        if self.motionManager!.isAccelerometerAvailable {
+            self.motionManager?.startAccelerometerUpdates()
+        }
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startMotionSensor), userInfo: nil, repeats: true)
+    }
         
         //Add to start button in counter conditional, change button value when complete
         func stopMotionSensor(){
-//            self.timer.upstream.connect().cancel()
+            self.timer.invalidate()
             if self.motionManager!.isAccelerometerActive {
                 self.motionManager?.stopAccelerometerUpdates()
             }
