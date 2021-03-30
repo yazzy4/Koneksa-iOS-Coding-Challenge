@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var startLogging = false
+    @State private var loggingStarted = false
+    @State private var isActivityLabelEmpty = false
+    @State private var isSharePresented = false
     @State private var timeCounter = 0
+    @State private var activityLabel = ""
     
     @ObservedObject var motionLogger = AccelerometerMonitor()
     @State private var backgroundTaskID: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 3104)
@@ -19,7 +22,7 @@ struct ContentView: View {
             Text("ACCELEROMETER")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-            HStack {
+                .padding()
                 VStack {
                     HStack {
                         Text(String(format: "%.3f", self.motionLogger.xLabel))
@@ -30,50 +33,33 @@ struct ContentView: View {
                         Spacer()
                         Text(String(format: "%.3f", self.motionLogger.yLabel))
                             .multilineTextAlignment(.leading)
-                    }.padding()
-                    HStack {
-                        Text("X")
-                            .font(.title2)
-                        Spacer()
-                        Text("Y")
-                            .font(.title2)
-                        Spacer()
-                        Text("Z")
-                            .font(.title2)
-                    }.padding()
-                    
+                            .padding()
+                    }
+                    .padding()
+            }
+            VStack{
+                HStack{
+                    TextField("Activity Name", text: $activityLabel)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                }
+            }
                     HStack {
                         Button(action: {
-                            if self.timeCounter == 0 {
-                                
-                            }
-                        }, label: {
-                            Spacer()
-                            HStack {
-                                Image(systemName: "square.and.arrow.up")
-                                Text("Save")
-                            }
+                            self.loggingStarted.toggle()
                             
-                        })
-                Spacer()
-                Spacer()
-                Spacer()
-                        HStack {
-                        Button(action: {
-                            self.startLogging.toggle()
-                            
-                            let feedback = UIImpactFeedbackGenerator(style: .medium)
+                            let feedback = UIImpactFeedbackGenerator(style: .light)
                             feedback.impactOccurred()
                             
-                            if self.startLogging {
+                            if self.loggingStarted {
                                 self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
                                 
                                 var samplingFrequency = UserDefaults.standard.integer(forKey: "frequency_preference")
                                 
-                                print("sampling frequency = \(samplingFrequency)")
+                                print("sampling frequency:  \(samplingFrequency)")
                                 
                                 if samplingFrequency == 0 {
-                                    samplingFrequency = 50
+                                    samplingFrequency == 50
                                 }
                                 
                                 self.motionLogger
@@ -83,28 +69,48 @@ struct ContentView: View {
                                 self.motionLogger.stopMotionSensor()
                                 UIApplication.shared.endBackgroundTask(self.backgroundTaskID)
                             }
+                            
                         }) {
-                            if self.startLogging {
-                                HStack{
-                                Image(systemName: "pause.circle")
-                                Text("Stop")
+                            if self.loggingStarted {
+                                HStack {
+                                    Image(systemName: "pause.circle")
+                                    Text("Stop")
                                 }
                             }
+                    
                             else {
                                 HStack{
                                     Image(systemName: "play.circle")
                                     Text("Start")
                                 }
                             }
-                        
-                        Spacer()
                         }
-                       
-                    }
-                    
-                }
+                        .padding(.trailing)
+                    Button(action: {
+                        if self.activityLabel.count == 0  {
+                            self.isActivityLabelEmpty = true
+                            self.isSharePresented = false
+                                    //Error handling with notification
+                                    let errorFeedback = UINotificationFeedbackGenerator()
+                                    errorFeedback.notificationOccurred(.error)
+                                }
+                                else {
+                                    self.isActivityLabelEmpty = false
+                                    self.isSharePresented = true
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                    Text("Save")
+                                }
+                            }
+                            .sheet(isPresented: $isSharePresented, content: {
+                                ActivityViewController(activityItems: self.motionLogger.data.getAccelFilePathURL(label: self.activityLabel), applicationActivities: nil)
+                            })
+                            .alert(isPresented: $isActivityLabelEmpty, content: {
+                                Alert(title: Text("Save unavailable"), message: Text("Please enter title or activity"))
+                            }).padding()
 
-            }
         }
     }
 }

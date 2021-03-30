@@ -48,7 +48,7 @@ class AccelerometerMonitor: NSObject, ObservableObject {
     
     let timeStamp = getTimeStamp()
     
-    self.data.append(time: timeStamp, x: self.xLabel, y: self.yLabel, z: self.zLabel)
+    self.data.append(time: timeStamp, x: self.xLabel, y: self.yLabel, z: self.zLabel, sensorType: PhoneSensorData())
     }
     
     func startUpdate(_ freq: Double) {

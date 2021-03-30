@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 struct PhoneSensorData {
     var accelerometerData: String
     let xyzColumns = "time,x,y,z\n"
@@ -15,21 +17,22 @@ struct PhoneSensorData {
         self.accelerometerData = self.xyzColumns
     }
     
-    func append(time: String, x: Double, y: Double, z: Double ) {
+    mutating func append(time: String, x: Double, y: Double, z: Double, sensorType: PhoneSensorData) {
         var end = "\(time) ,"
         end.append("\(x) ,")
         end.append("\(y) ,")
         end.append("\(z) ,")
+        self.accelerometerData.append(end)
     }
     
-    func getAccelFilePathURLs(label: String, type: String) -> [URL]{
+    func getAccelFilePathURL(label: String) -> [URL]{
         let format = DateFormatter()
         format.dateFormat = "yyyyMMddHHmmss"
         let time = format.string(from: Date())
         
-        let tempPath = NSHomeDirectory() + "tmp"
+        let tempPath = NSHomeDirectory() + "/tmp"
         
-        let apd = "\(time)_\(label)_\(type)"
+        let apd = "\(time)_\(label)"
         
         let accelFilePath = tempPath + "//accelermeter_\(apd).csv"
         
