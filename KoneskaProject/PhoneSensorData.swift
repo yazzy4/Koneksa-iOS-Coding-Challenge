@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct PhoneSensorData {
     var accelerometerData: String
     let xyzColumns = "time,x,y,z\n"
@@ -25,7 +23,7 @@ struct PhoneSensorData {
         self.accelerometerData.append(end)
     }
     
-    func getAccelFilePathURL(label: String) -> [URL]{
+    mutating func getAccelFilePathURL(label: String) -> [URL]{
         let format = DateFormatter()
         format.dateFormat = "yyyyMMddHHmmss"
         let time = format.string(from: Date())
@@ -45,6 +43,8 @@ struct PhoneSensorData {
         
         var url = [URL]()
         url.append(URL(fileURLWithPath: accelFilePath))
+        
+        self.dataReset()
         
         return url
     }

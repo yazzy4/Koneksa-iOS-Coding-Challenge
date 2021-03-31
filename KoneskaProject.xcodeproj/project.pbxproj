@@ -17,6 +17,7 @@
 		919BC89C260F9711009C336A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 919BC89A260F9711009C336A /* LaunchScreen.storyboard */; };
 		919BC8A7260F9711009C336A /* KoneskaProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BC8A6260F9711009C336A /* KoneskaProjectTests.swift */; };
 		919BC8B2260F9711009C336A /* KoneskaProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BC8B1260F9711009C336A /* KoneskaProjectUITests.swift */; };
+		91BC2DA22614CE6D0065AE95 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 91BC2DA12614CE6D0065AE95 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		919BC8AD260F9711009C336A /* KoneskaProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KoneskaProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		919BC8B1260F9711009C336A /* KoneskaProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneskaProjectUITests.swift; sourceTree = "<group>"; };
 		919BC8B3260F9711009C336A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91BC2DA12614CE6D0065AE95 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		919BC883260F970F009C336A = {
 			isa = PBXGroup;
 			children = (
+				91BC2DA12614CE6D0065AE95 /* Settings.bundle */,
 				919BC88E260F970F009C336A /* KoneskaProject */,
 				919BC8A5260F9711009C336A /* KoneskaProjectTests */,
 				919BC8B0260F9711009C336A /* KoneskaProjectUITests */,
@@ -245,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91BC2DA22614CE6D0065AE95 /* Settings.bundle in Resources */,
 				919BC89C260F9711009C336A /* LaunchScreen.storyboard in Resources */,
 				919BC899260F9711009C336A /* Preview Assets.xcassets in Resources */,
 				919BC896260F9711009C336A /* Assets.xcassets in Resources */,

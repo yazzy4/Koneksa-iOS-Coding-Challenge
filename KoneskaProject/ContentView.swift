@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @ObservedObject var motionLogger = AccelerometerMonitor()
     @State private var backgroundTaskID: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 3104)
+    private let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack {
@@ -44,33 +45,33 @@ struct ContentView: View {
                         .padding(.horizontal)
                 }
             }
-                    HStack {
-                        Button(action: {
-                            self.loggingStarted.toggle()
+                HStack {
+                    Button(action: {
+                        self.loggingStarted.toggle()
                             
-                            let feedback = UIImpactFeedbackGenerator(style: .light)
-                            feedback.impactOccurred()
+                        let feedback = UIImpactFeedbackGenerator(style: .medium)
+                        feedback.impactOccurred()
                             
-                            if self.loggingStarted {
-                                self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+                        if self.loggingStarted {
+                            self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
                                 
-                                var samplingFrequency = UserDefaults.standard.integer(forKey: "frequency_preference")
-                                
+                        var samplingFrequency = UserDefaults.standard.integer(forKey: "frequency_preference")
+                            
                                 print("sampling frequency:  \(samplingFrequency)")
-                                
+                                    
                                 if samplingFrequency == 0 {
-                                    samplingFrequency == 50
+                                    samplingFrequency = 100
                                 }
-                                
+                            
                                 self.motionLogger
                                     .startUpdate(Double(samplingFrequency))
                             }
                             else {
-                                self.motionLogger.stopMotionSensor()
+                               self.motionLogger.stopMotionSensor()
                                 UIApplication.shared.endBackgroundTask(self.backgroundTaskID)
                             }
                             
-                        }) {
+                    }) {
                             if self.loggingStarted {
                                 HStack {
                                     Image(systemName: "pause.circle")
@@ -79,7 +80,7 @@ struct ContentView: View {
                             }
                     
                             else {
-                                HStack{
+                                HStack {
                                     Image(systemName: "play.circle")
                                     Text("Start")
                                 }
@@ -110,10 +111,10 @@ struct ContentView: View {
                             .alert(isPresented: $isActivityLabelEmpty, content: {
                                 Alert(title: Text("Save unavailable"), message: Text("Please enter title or activity"))
                             }).padding()
-
-        }
-    }
-}
+                    
+                        }
+                    }
+                }
 
 struct ActivityViewController: UIViewControllerRepresentable {
     var activityItems: [Any]
