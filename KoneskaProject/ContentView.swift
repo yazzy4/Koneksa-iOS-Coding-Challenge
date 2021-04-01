@@ -54,7 +54,8 @@ struct ContentView: View {
                             
                         if self.loggingStarted {
                             self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-                                
+                            
+                        //Access sampling frequency in app settings
                         var samplingFrequency = UserDefaults.standard.integer(forKey: "frequency_preference")
                             
                                 print("sampling frequency:  \(samplingFrequency)")
